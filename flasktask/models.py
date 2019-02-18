@@ -21,7 +21,7 @@ class Task(db.Model):
     # TODO: ??? list ???
 
     def __repr__(self):
-        return 'Title(' + self.title + '), description(' + self.description + ')'
+        return f'Title({self.title}), description({self.description})'
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -29,13 +29,13 @@ class User(db.Model, UserMixin):
     # TODO: make this max_length shared between template and here
     email = db.Column(db.String(120), unique=True, nullable=False)
     # TODO store actual picture in DB
-    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+    image_file = db.Column(db.String(20), nullable=False, default='../default.jpg')
     password = db.Column(db.String(60), nullable=False)
     # TODO Shared max length for passwords - enforce in regitration form
     tasks = db.relationship('Task', foreign_keys=[Task.reporter], lazy=True)
 
     def __repr__(self):
-        return "User('" + self.username + "', '" + self.email + "', " + self.image_file + "')"
+        return f"User('{self.username}', '{ self.email}', {self.image_file}')"
 
     def get_reset_token(self, expires_sec=1000):
         ser = Serializer(app.config['SECRET_KEY'], expires_sec)

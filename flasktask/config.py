@@ -11,6 +11,6 @@ class Config:
     SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
     # recaptcha is v2 "I am not a robot" button
     RECAPTCHA_USE_SSL = True
-    RECAPTCHA_PUBLIC_KEY = '6LfCE5IUAAAAALYkPVGVTLKBlzEgzB4JsK3349Ii'
-    RECAPTCHA_PRIVATE_KEY = ''
+    RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')
+    RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
     RECAPTCHA_OPTIONS = {'theme': 'black'}

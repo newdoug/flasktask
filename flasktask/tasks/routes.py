@@ -20,7 +20,7 @@ def new_task():
                 reporter=current_user.id, assignee=assignee)
         db.session.add(task)
         db.session.commit()
-        flash('The task #' + str(task.issue_number) + ' was successfully created!', 'success')
+        flash(f'The task #{task.issue_number} was successfully created!', 'success')
         # TODO: redirect to detail view of new task.
         return redirect(url_for('main.home'))
     return render_template('create_task.html', title='New Task', form=form,
@@ -35,7 +35,7 @@ def task_details(task_id):
 @tasks.route('/task/update/<int:task_id>/', methods=['GET', 'POST'])
 @login_required
 def task_update(task_id):
-    # TODO: the button says "create"
+    # FIXME: the button says "create"
     task = Task.query.get_or_404(task_id)
     if task.reporter != current_user.id and task.assignee != current_user.id:
         abort(403)
@@ -48,14 +48,9 @@ def task_update(task_id):
         flash('This post has been updated', 'success')
         return redirect(url_for('tasks.task_details', task_id=task.issue_number))
     elif request.method == 'GET':
-        print('The whole form: ', form)
-        print('The whole form assignee: ', form.assignee)
-        print('The whole form assignee data: ', form.assignee.data)
         form.title.data = task.title
         form.description.data = task.description
         form.assignee.data = task.assignee
-        print('The whole form assignee: ', form.assignee)
-        print('The whole form assignee data: ', form.assignee.data)
     return render_template('create_task.html', title='Update Task', task=task,
             legend='Update Task', form=form)
 

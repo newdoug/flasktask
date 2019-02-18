@@ -7,9 +7,9 @@ ERROR_404 = 404
 ERROR_500 = 500
 
 error_pages = {
-    ERROR_403: 'errors/' + str(ERROR_403) + '.html',
-    ERROR_404: 'errors/' + str(ERROR_404) + '.html',
-    ERROR_500: 'errors/' + str(ERROR_500) + '.html',
+    ERROR_403: f'errors/{ERROR_403}.html',
+    ERROR_404: f'errors/{ERROR_404}.html',
+    ERROR_500: f'errors/{ERROR_500}.html',
 }
 
 err_msg = 'An error occurred'

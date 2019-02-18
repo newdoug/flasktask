@@ -13,7 +13,7 @@ users = Blueprint('users', __name__)
 @users.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        flash('You are already logged in as ' + str(current_user) +'!', 'success')
+        flash(f'You are already logged in as {current_user}!', 'success')
         return redirect(url_for('main.home'))
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -23,7 +23,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         # TODO fstring when python >3.6
-        flash('Account created for username \'' + str(form.username.data) + '\'!', 'success')
+        flash(f'Account created for username \'{form.username.data}\'!', 'success')
         return redirect(url_for('users.login'))
 
     return render_template('register.html', title='Register', form=form)
@@ -31,7 +31,7 @@ def register():
 @users.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        flash('You are already logged in as ' + str(current_user) +'!', 'success')
+        flash(f'You are already logged in as \'{current_user}\'!', 'success')
         return redirect(url_for('main.home'))
     form = LoginForm()
     if form.validate_on_submit():
@@ -40,7 +40,7 @@ def login():
                 form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            flash('Successfully logged in with email \'' + str(form.email.data) + '\'!', 'success')
+            flash(f'Successfully logged in with email \'{form.email.data}\'!', 'success')
             if next_page:
                 return redirect(next_page)
             return redirect(url_for('main.home'))
@@ -121,7 +121,7 @@ def reset_request():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         send_reset_password_email(user)
-        flash('An email has been sent to \'' + str(form.email.data) + '\' with instructions to reset your password.', 'info')
+        flash(f'An email has been sent to \'{form.email.data}\' with instructions to reset your password.', 'info')
         return redirect(url_for('users.login'))
     return render_template('reset_request.html', title='Reset Password', form=form)
 

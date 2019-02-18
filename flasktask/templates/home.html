@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% for task in tasks.items %}
+    <article class="media description-section">
+      <div class="media-body">
+        <div class="task-metadata">
+          <!-- TODO make a page detailing users (only some information that should be public) -->
+          <a class="mr-2" href="#">{{ task.reporter }}</a>
+          <small class="text-muted">{{ task.created_dt.strftime('%Y-%m-%d %H-%M') }}</small>
+        </div>
+        <h2><a class="task-title" href="{{ url_for('tasks.task_details', task_id=task.issue_number) }}">{{ task.title }}</a></h2>
+        <p class="task-description">{{ task.description }} </p>
+      </div>
+    </article>
+  {% endfor %}
+  {% for page_number in tasks.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_number %}
+      {% if tasks.page == page_number %}
+        <a class="btn btn-info" href="{{ url_for('main.home', page=page_number) }}">{{ page_number }}</a>
+      {% else %}
+        <a class="btn" href="{{ url_for('main.home', page=page_number) }}">{{ page_number }}</a>
+      {% endif %}
+    {% else %}
+      ...
+    {% endif %}
+  {% endfor %}
+{% endblock content %}

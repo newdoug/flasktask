@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-3">{{ task_list_header }}</h1>
+  {% if tasks.items|length %}
+    {% for task in tasks.items %}
+      <article class="media description-section">
+        <div class="media-body">
+          <div class="task-metadata">
+            <small class="text-muted">{{ task.created_dt }} </small>
+          </div>
+          <h2><a class="task-title" href="{{ url_for('tasks.task_details', task_id=task.issue_number) }}">{{ task.title }}</a></h2>
+          <p class="task-description">{{ task.description }}</p>
+        </div>
+      </article>
+    {% endfor %}
+    {% for page_number in tasks.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+      {% if page_number %}
+        {% if tasks.page == page_number %}
+          <a class="btn btn-info" href="{{ url_for('users.user_assigned_tasks', page=page_number) }}">{{ page_number }}</a>
+        {% else %}
+          <a class="btn" href="{{ url_for('users.user_assigned_tasks', page=page_number) }}">{{ page_number }}</a>
+        {% endif %}
+      {% else %}
+        ...
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    You have no assigned tasks. Good job!
+  {% endif %}
+{% endblock content %}

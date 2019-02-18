@@ -1,0 +1,70 @@
+body {
+  background: #fafafa;
+  color: #333333;
+  margin-top: 5rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #444444;
+}
+
+.bg-steel {
+  /* a lightish grey with a little red */
+  background-color: #333232;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #637077;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #ffffff;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+.description-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 2px solid #554e4e;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.task-title {
+  color: #444444;
+}
+
+a.task-title:hover {
+  /* a blueish */
+  color: #1234ce;
+  text-decoration: none;
+}
+
+.task-description {
+  white-space: pre-line;
+}
+
+.task-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #ffffff
+}
+
+.task-metadata a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}

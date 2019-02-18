@@ -1,0 +1,11 @@
+
+A better table-like view for the tasks/issues should be on the home and assigned tasks pages.
+Searchable tasks. It would be a long road to query support that Jira offers.
+Projects and tasks per project - different permissions settings
+Sorting the tables.
+Send an email when a task is assigned to you.
+Watchers ability - watch a task and be emailed whenever it changes.
+History ability is not implemented - allow modifications of tasks and a log of what happened to the task somewhere, probably visible to people on the same project.
+Tags - ability to add tags to each task, create custom tags per project.
+Have more user roles per project - developer, owner, maintainer, etc.
+

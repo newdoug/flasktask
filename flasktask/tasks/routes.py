@@ -4,7 +4,7 @@ from flask import (render_template, url_for, flash,
                            redirect, request, abort, Blueprint)
 from flask_login import current_user, login_required
 from flasktask import db
-from flasktask.models import Task
+from flasktask.models import Task, PriorityEnum
 from flasktask.tasks.forms import TaskForm
 
 
@@ -17,7 +17,7 @@ def new_task():
     if form.validate_on_submit():
         assignee = form.assignee.data.id if form.assignee.data else None
         task = Task(title=form.title.data, description=form.description.data,
-                reporter=current_user.id, assignee=assignee)
+                reporter=current_user.id, assignee=assignee, priority=PriorityEnum(form.priority.data))
         db.session.add(task)
         db.session.commit()
         flash(f'The task #{task.issue_number} was successfully created!', 'success')

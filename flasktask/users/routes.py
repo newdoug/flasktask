@@ -6,6 +6,7 @@ from flasktask.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from flasktask.models import User, Task
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
+import safe
 
 users = Blueprint('users', __name__)
 
@@ -26,7 +27,8 @@ def register():
         flash(f'Account created for username \'{form.username.data}\'!', 'success')
         return redirect(url_for('users.login'))
 
-    return render_template('register.html', title='Register', form=form)
+    return render_template('register.html', title='Register', form=form,
+            safe=safe)
 
 @users.route('/login', methods=['GET', 'POST'])
 def login():

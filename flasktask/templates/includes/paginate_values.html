@@ -1,0 +1,13 @@
+{% macro paginate(values, page_url, page_number) -%}
+{% for page_number in values.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_number %}
+        {% if values.page == page_number %}
+            <a class="btn btn-info" href="{{ url_for(page_url, page=page_number) }}">{{ page_number }}</a>
+        {% else %}
+            <a class="btn" href="{{ url_for(page_url, page=page_number) }}">{{ page_number }}</a>
+        {% endif %}
+    {% else %}
+        ...
+    {% endif %}
+{% endfor %}
+{%- endmacro -%}

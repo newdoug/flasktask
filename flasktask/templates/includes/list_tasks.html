@@ -1,0 +1,49 @@
+{% macro list_tasks(tasks) -%}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Title</th>
+            <th scope="col">Assignee</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for task in tasks.items %}
+    <tr>
+        <th scope="row">{{ task.issue_number }}</th>
+        <td>
+            <img class="task-list-img"
+            src="{{ url_for('static', filename='images/' + task.getPrioritySymbolFile(task.priority)) }}">
+        </td>
+        <td><a class="task-title" href="{{ url_for('tasks.task_details', task_id=task.issue_number) }}">{{ task.title }}</a></td>
+        <td>
+            {# TODO: <a href="{{ url_for('account') }}">#}
+            {% if task.assignee %}
+                <a href="#">
+                    <img class="rounded-circle task-list-img"
+                    src="{{ url_for('static', filename='images/profile_pictures/' + task.getAssignee().image_file) }}">
+                </a>
+            {% else %}
+                <div class="text-muted">Unassigned</div>
+            {% endif %}
+        </td>
+    </tr>
+{#
+    <div class="media-body">
+        <div class="task-metadata">
+        <!-- TODO make a page detailing users (only some information that should be public) -->
+        <a class="mr-2" href="#">{{ task.reporter }}</a>
+        <small class="text-muted">{{ task.created_dt.strftime('%Y-%m-%d %H-%M') }}</small>
+        </div>
+        <h2><a class="task-title" href="{{ url_for('tasks.task_details', task_id=task.issue_number) }}">{{ task.title }}</a></h2>
+        <p class="task-description">{{ task.description }} </p>
+    </div>
+    </li>
+#}
+{% else %}
+    <div>There are no tasks to list!</div>
+{% endfor %}
+    </tbody>
+</table>
+{%- endmacro -%}

@@ -1,4 +1,4 @@
 **/__pychache__
 static/images/profile_pictures/*
-!static/images/profile_pictures/empty_file.txt
+!static/images/profile_pictures/default.jpg
 site.db
